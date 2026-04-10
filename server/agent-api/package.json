@@ -1,0 +1,22 @@
+{
+  "name": "giftmaster-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GiftMaster Browser Agent API — Playwright-based gift research and task automation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@supabase/supabase-js": "^2.103.0",
+    "bullmq": "^5.34.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.0",
+    "helmet": "^8.0.0",
+    "ioredis": "^5.4.2",
+    "playwright": "^1.49.0"
+  }
+}

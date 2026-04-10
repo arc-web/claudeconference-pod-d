@@ -1,0 +1,35 @@
+# ZeroClaw Configuration for GiftMaster
+# Copy to /root/.zeroclaw/config.toml on the VPS
+# Replace PLACEHOLDER values with real keys before starting
+
+api_key = "PLACEHOLDER_ANTHROPIC_KEY"
+default_provider = "anthropic"
+default_model = "anthropic/claude-sonnet-4-20250514"
+default_temperature = 0.7
+
+[memory]
+backend = "sqlite"
+auto_save = true
+
+[gateway]
+require_pairing = true
+allow_public_bind = false
+
+[autonomy]
+level = "supervised"
+workspace_only = true
+allowed_commands = ["git", "npm", "node", "curl"]
+forbidden_paths = ["/etc", "/root/.ssh", "/root/.gnupg"]
+
+# ---- Messaging Channels ----
+# Uncomment and configure when ready.
+
+# [channels_config.whatsapp]
+# access_token = "EAABx..."
+# phone_number_id = "123456789"
+# verify_token = "giftmaster-verify-secret"
+# allowed_numbers = ["*"]
+
+# [channels_config.telegram]
+# token = "bot123456:ABC..."
+# allowed_users = ["*"]
