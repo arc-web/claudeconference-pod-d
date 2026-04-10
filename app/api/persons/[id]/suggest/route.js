@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { getNotes } from '@/lib/db'
+import { getNotes, adminClient } from '@/lib/db'
 import Anthropic from '@anthropic-ai/sdk'
 
 async function getUserId(request) {
@@ -43,5 +43,11 @@ export async function POST(request, { params }) {
   const response = await stream.finalMessage()
   const suggestion = response.content.find(b => b.type === 'text')?.text ?? 'No suggestion generated.'
 
-  return NextResponse.json({ suggestion })
+  const { data: saved } = await adminClient()
+    .from('chat_messages')
+    .insert({ person_id: personId, user_id: userId, type: 'suggestion', content: suggestion })
+    .select()
+    .single()
+
+  return NextResponse.json({ suggestion, message: saved })
 }

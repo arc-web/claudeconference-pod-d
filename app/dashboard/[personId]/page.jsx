@@ -16,7 +16,6 @@ export default function PersonPage() {
   const [messages, setMessages] = useState([])
   const [chatInput, setChatInput] = useState('')
   const [loading, setLoading] = useState(true)
-  const [suggestion, setSuggestion] = useState('')
   const [suggesting, setSuggesting] = useState(false)
   const chatBottomRef = useRef(null)
 
@@ -117,12 +116,11 @@ export default function PersonPage() {
   // --- Suggest ---
   async function getSuggestion() {
     setSuggesting(true)
-    setSuggestion('')
+    setTab('chat')
     const res = await authFetch(`/api/persons/${personId}/suggest`, { method: 'POST' })
     if (res?.ok) {
       const data = await res.json()
-      setSuggestion(data.suggestion)
-      setTab('chat')
+      if (data.message) setMessages(prev => [...prev, data.message])
     }
     setSuggesting(false)
   }
@@ -177,11 +175,13 @@ export default function PersonPage() {
       {tab === 'chat' && (
         <div className="chat-wrap">
           <div className="chat-messages">
-            {messages.length === 0 && !suggestion && !suggesting && <p className="empty">No messages yet.</p>}
+            {messages.length === 0 && !suggesting && <p className="empty">No messages yet.</p>}
             {messages.map(msg => (
               msg.type === 'agent_card'
                 ? <AgentCard key={msg.id} msg={msg} onAction={updateCardStatus} />
-                : <UserBubble key={msg.id} msg={msg} />
+                : msg.type === 'suggestion'
+                  ? <SuggestionBubble key={msg.id} text={msg.content} />
+                  : <UserBubble key={msg.id} msg={msg} />
             ))}
             {suggesting && (
               <div className="agent-card" style={{ opacity: 0.6 }}>
@@ -189,7 +189,6 @@ export default function PersonPage() {
                 <p style={{ fontSize: '0.9rem', fontStyle: 'italic' }}>Thinking of ideas…</p>
               </div>
             )}
-            {suggestion && !suggesting && <SuggestionBubble text={suggestion} />}
             <div ref={chatBottomRef} />
           </div>
           <form className="chat-input-row" onSubmit={sendMessage}>
