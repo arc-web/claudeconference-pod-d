@@ -1,5 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
+import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { z } from 'zod'
 import { adminClient } from '@/lib/db'
 
@@ -139,12 +139,9 @@ export async function POST(request) {
   }
 
   const server = createServer()
-  const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined })
+  const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined })
   await server.connect(transport)
-
-  const body = await request.json()
-  const response = await transport.handleRequest(request, new Response(), body)
-  return response
+  return transport.handleRequest(request)
 }
 
 export async function GET(request) {
@@ -154,8 +151,7 @@ export async function GET(request) {
   }
 
   const server = createServer()
-  const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined })
+  const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined })
   await server.connect(transport)
-  const response = await transport.handleRequest(request, new Response(), null)
-  return response
+  return transport.handleRequest(request)
 }

@@ -33,7 +33,7 @@ export async function POST(request, { params }) {
   const stream = client.messages.stream({
     model: 'claude-opus-4-6',
     max_tokens: 512,
-    thinking: { type: 'adaptive' },
+    thinking: { type: 'enabled', budget_tokens: 256 },
     messages: [{
       role: 'user',
       content: `You are a thoughtful gift advisor. Based on the following notes about a person, suggest specific, actionable gift ideas grouped by category.\n\nNotes:\n${notesText}\n\nFormat your response as categorized sections. Each section has a bold header (e.g. **Art & creative life**) followed by bullet points starting with "• ". 3-5 categories, 2-3 items each. Be specific and personal to the notes. No intro sentence, start directly with the first category.`
