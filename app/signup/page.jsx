@@ -16,7 +16,6 @@ export default function SignupPage() {
     setError('')
     setLoading(true)
 
-    // Create user with auto-confirmation via server route
     const res = await fetch('/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -25,7 +24,6 @@ export default function SignupPage() {
     const data = await res.json()
     if (!res.ok) { setError(data.error); setLoading(false); return }
 
-    // Sign in immediately since email is pre-confirmed
     const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
     setLoading(false)
     if (signInError) setError(signInError.message)
@@ -33,39 +31,45 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="container" style={{ maxWidth: 420, paddingTop: '4rem' }}>
-      <div className="card">
-        <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Create account</h1>
-        <p style={{ color: '#666', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-logo">
+          <div className="auth-logo-icon">♥</div>
+          <span className="auth-logo-text">GiftMaster</span>
+        </div>
+        <h1 className="auth-title">Create your account</h1>
+        <p className="auth-sub">
           Already have an account?{' '}
-          <a className="link" href="/login">Sign in</a>
+          <a className="auth-link" href="/login">Sign in</a>
         </p>
         <form onSubmit={handleSignup}>
-          <div className="mt-1">
+          <div className="form-group">
+            <label className="form-label">Email</label>
             <input
+              className="form-input"
               type="email"
-              placeholder="Email"
+              placeholder="you@example.com"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
             />
           </div>
-          <div className="mt-1">
+          <div className="form-group">
+            <label className="form-label">Password</label>
             <input
+              className="form-input"
               type="password"
-              placeholder="Password (min 6 chars)"
+              placeholder="Min. 6 characters"
               value={password}
               onChange={e => setPassword(e.target.value)}
               minLength={6}
               required
             />
           </div>
-          {error && <p className="error">{error}</p>}
-          <div className="mt-2">
-            <button className="btn-primary" type="submit" disabled={loading} style={{ width: '100%' }}>
-              {loading ? 'Creating account…' : 'Create account'}
-            </button>
-          </div>
+          {error && <p className="error-msg">{error}</p>}
+          <button className="btn-auth" type="submit" disabled={loading}>
+            {loading ? 'Creating account…' : 'Create account'}
+          </button>
         </form>
       </div>
     </div>
