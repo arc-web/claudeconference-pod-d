@@ -1,36 +1,16 @@
 {
-  "name": "giftmaster",
+  "name": "people-app",
+  "version": "0.1.0",
   "private": true,
-  "version": "1.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@supabase/supabase-js": "^2.103.0",
-    "@tailwindcss/vite": "^4.2.2",
-    "autoprefixer": "^10.4.27",
-    "date-fns": "^4.1.0",
-    "dexie": "^4.4.2",
-    "dexie-react-hooks": "^4.4.0",
-    "framer-motion": "^12.38.0",
-    "lucide-react": "^1.8.0",
-    "postcss": "^8.5.9",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-hook-form": "^7.72.1",
-    "react-router-dom": "^7.14.0",
-    "tailwindcss": "^4.2.2",
-    "vite-plugin-pwa": "^1.2.0",
-    "workbox-window": "^7.4.0",
-    "zod": "^4.3.6",
-    "zustand": "^5.0.12"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^6.0.1",
-    "vite": "^8.0.8"
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "@supabase/supabase-js": "^2.45.0"
   }
 }
