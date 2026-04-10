@@ -31,8 +31,10 @@ Most people aren't bad at relationships — they're bad at *remembering* and *pl
 | **Icons** | Lucide React | Consistent, lightweight icon set |
 | **Animation** | Framer Motion | Page transitions, micro-interactions |
 | **Testing** | Vitest + Testing Library | Unit + integration testing |
-| **Rev 2 Backend** | Supabase | Auth, Postgres, real-time sync, edge functions |
-| **Rev 2 AI** | Claude API (Sonnet) | Gift intelligence, communication coaching |
+| **Hosting** | Vercel | Auto-deploy from GitHub, CDN, edge functions |
+| **Backend** | Supabase | Auth, Postgres, real-time sync, edge functions |
+| **Browser Agent** | Hetzner VPS + Playwright | Automated gift research, reservations, ordering |
+| **AI** | Claude API (Sonnet) | Gift intelligence, agent brain, communication coaching |
 
 ---
 
@@ -317,8 +319,19 @@ No AI needed for v1. The engine runs on simple rules:
 
 ---
 
+## Deployment
+
+- **Frontend hosting**: Vercel (connected to this GitHub repo, auto-deploys on push)
+- **Backend**: Supabase (Auth, Postgres, Edge Functions, Realtime)
+- **Browser Agent**: Hetzner VPS running Playwright + BullMQ for automated gift research, reservations, and ordering
+- See `docs/INFRASTRUCTURE.md` for full architecture, setup scripts, and deployment checklist
+
+---
+
 ## Reference: See Also
 - `docs/PRD.md` — Detailed feature specifications and user stories
 - `docs/DATA_MODEL.md` — Complete entity schemas with field definitions
 - `docs/ARCHITECTURE.md` — Technical architecture deep-dive
+- `docs/INFRASTRUCTURE.md` — Vercel, Supabase, and Hetzner browser agent setup
 - `docs/ROADMAP.md` — Milestone timeline and success metrics
+- `TEAM.md` — Team roles, file ownership, and Claude Code starter prompts
