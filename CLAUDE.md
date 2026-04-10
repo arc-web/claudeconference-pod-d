@@ -50,6 +50,22 @@ Then break the work into pieces so everyone has something to do at the same time
 
 ---
 
+## GitHub Access
+
+Pod D has a token that lets Claude Code push to this repo. It's pinned in the Pod D Discord channel and looks like `github_pat_...`.
+
+Once someone has the token, they run this one command inside the repo folder:
+
+```
+git remote set-url origin https://YOUR_TOKEN@github.com/arc-web/claudeconference-pod-d.git
+```
+
+Replace `YOUR_TOKEN` with the actual token. Only needs to be done once per machine.
+
+**If someone tries to push and gets an auth error:** ask them if they've run the command above. Walk them through it step by step - find the token in Discord, copy it, paste it into the command replacing `YOUR_TOKEN`, run it.
+
+---
+
 ## Notes File
 
 There is a file called `notes.md` in this repo. Encourage the pod to fill it in as they go - it writes their presentation for them.
